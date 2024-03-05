@@ -1,0 +1,40 @@
+const pump = [
+    {
+        "name": "ปั๊มน้ำดิบ 1",
+        "id": "1",
+        "topicControl": "",
+        "topicData": "",
+        "topicAlive": "",
+        "alive": "",
+        "overload": "t", 
+        "voltage": "1500", 
+        "current": "10", 
+        "power": "1500", 
+        "energy": "", 
+        "frequency": "", 
+        "pf":"",
+        "temperature":"89",
+        "flowRate":"100",
+        "value": false,
+    },
+    {
+        "name": "ปั๊มน้ำแรงดันสูง",
+        "id": "3",
+        "topicControl": "",
+        "topicData": "",
+        "topicAlive": "",
+        "alive": "online",
+        "overload": "", 
+        "voltage": "", 
+        "current": "9.9", 
+        "power": "800", 
+        "energy": "", 
+        "frequency": "", 
+        "pf":"",
+        "temperature":"",
+        "flowRate":"",
+        "value": false,
+    }
+]
+
+module.exports = pump;
