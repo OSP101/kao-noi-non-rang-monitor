@@ -52,7 +52,7 @@ export default function Pump() {
                                                     <div>
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
-                                                                <IconContext.Provider value={{ color: "#E3AA24" }}>
+                                                                <IconContext.Provider value={{ color: "black"}}>
                                                                     <GiElectric style={{ marginTop: 6 }} size={25} />
                                                                 </IconContext.Provider>
                                                             </Grid.Container>
@@ -78,7 +78,7 @@ export default function Pump() {
                                                     <div>
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
-                                                                <IconContext.Provider value={{ color: "#E3AA24" }}>
+                                                                <IconContext.Provider value={{ color: "black"}}>
                                                                     <GiElectric style={{ marginTop: 6 }} size={25} />
                                                                 </IconContext.Provider>
                                                             </Grid.Container>
@@ -108,7 +108,7 @@ export default function Pump() {
                                                     <div>
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
-                                                                <IconContext.Provider value={{ color: "#ED0000" }}>
+                                                                <IconContext.Provider value={{ color: "black"}}>
                                                                     <FaTemperatureHigh style={{ marginTop: 6 }} size={25} />
                                                                 </IconContext.Provider>
                                                             </Grid.Container>
@@ -134,7 +134,7 @@ export default function Pump() {
                                                     <div>
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
-                                                                <IconContext.Provider value={{ color: "#09A3FF" }}>
+                                                                <IconContext.Provider value={{ color: "black" }}>
                                                                     <BiWater style={{ marginTop: 6 }} size={25} />
                                                                 </IconContext.Provider>
                                                             </Grid.Container>

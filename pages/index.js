@@ -115,14 +115,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Grid.Container justify="center" alignItems="center" css={{ mt: 10, d: 'flex', flexDirection: "column" }}>
-        <Text color="#fff" size={25} css={{ mt: 0, fontFamily: 'NotoSansThai' }}>
+        <Text color="white" size={25} css={{ mt: 0, fontFamily: 'NotoSansThai' }}>
           Kao Noi Non Rang Plumbing
         </Text>
 
       </Grid.Container>
 
       <Grid.Container justify="flex-end" alignItems="center" css={{ mt: -30, pr: 25, d: 'flex', flexDirection: "row" }}>
-        <IconContext.Provider value={{ color: "#fff" }}>
+        <IconContext.Provider value={{ color: "black"}}>
           <HiComputerDesktop size={10} />
         </IconContext.Provider>
         <Text size={10} css={{ ml: 3, mt: 3, fontFamily: 'NotoSansThai' }}>
@@ -167,7 +167,7 @@ export default function Home() {
 
                 <Grid.Container alignItems="center" justify="space-around" css={{ mt: 2 }}>
                   <Text b size={10} color="#101C42" css={{ fontFamily: 'NotoSansThai' }}>{isLock ? "Lock" : "Unlock"}</Text>
-                  <Switch size="xs" css={{ $$switchColor: "#fff", $$switchColorHover: "#D2D2D2" }} checked={isLock} />
+                  <Switch size="xs" css={{ $$switchColor: "white", $$switchColorHover: "#D2D2D2" }} checked={isLock} />
                 </Grid.Container>
                 <Grid.Container css={{ mt: 5 }} alignItems="center" justify="space-around">
                   {/* <Image alt="" src='/images/valve.png' width={50} height={50} /> */}
