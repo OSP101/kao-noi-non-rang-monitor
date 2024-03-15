@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import dynamic from 'next/dynamic'
 
 import Pump from "./Pump"
-
+import Lavel from "./Lavel";
 
 import { HiComputerDesktop } from 'react-icons/hi2';
 import { IconContext } from 'react-icons';
@@ -12,6 +12,10 @@ import { HiLockClosed, HiLockOpen } from 'react-icons/hi';
 
 
 import { Card, Modal, Grid, Button, Text, Container, Spacer, Switch, } from "@nextui-org/react";
+import Quality from "./Quality";
+import Chemicals from "./Chemicals";
+import Energy from "./Energy";
+
 
 const Clock = dynamic(() => import('react-live-clock'), {
   ssr: false,
@@ -226,7 +230,7 @@ export default function Home() {
                 </Text>
               </Grid.Container>
               <Grid.Container css={{ mr: 20, d: 'flex', flexDirection: 'row' }}>
-                <Text  size={30} css={{ mt: -9, fontFamily: 'NotoSansThai' }}>
+                <Text size={30} css={{ mt: -9, fontFamily: 'NotoSansThai' }}>
                   {weather ? (weather.main.temp - 273.15).toFixed(1) : null}
                 </Text>
                 <Text size={12} css={{ mt: 0, fontFamily: 'NotoSansThai' }}>
@@ -238,8 +242,24 @@ export default function Home() {
 
           </Grid>
         </Card>
-
+        <Grid.Container css={{ d: 'flex', mt: 10 }}>
+          <Grid>
             <Pump />
+          </Grid>
+          <Grid>
+            <Lavel />
+            <Grid css={{d:'flex'}}>
+              <Grid>
+              <Chemicals />
+              <Quality />
+              </Grid>
+              <Grid>
+                <Energy />
+              </Grid>
+            </Grid>
+
+          </Grid>
+        </Grid.Container>
 
       </Grid.Container>
     </div>

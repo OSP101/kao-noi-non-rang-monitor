@@ -23,8 +23,8 @@ export default function Pump() {
     const [pumpData, scalePumpData] = useState(pump)
 
     return (
-        <Grid.Container css={{ height: 450 }}>
-            <Grid xs={6}>
+        <Grid.Container css={{ height: 450 , width: 492}}>
+            <Grid >
                 <Grid.Container css={{ mt: 10 }}>
                     {pumpData.map((item) => (
                         <Grid.Container key={item.id} justify="center" alignItems="center" css={{ d: "flex" }}>
@@ -33,7 +33,7 @@ export default function Pump() {
                                 <Grid.Container alignItems="center" justify="space-between" css={{ mt: 10 }}>
                                     <Grid css={{ d: "flex", flexDirection: "row" }}>
                                         <Grid.Container justify="center" alignItems="center" css={{ d: "flex", flexDirection: "column" }}>
-                                            <Image alt="" src='/images/water-pump.png' width={90} height={70} />
+                                            <Image alt="" src='/images/water-pump.png' width={70} height={70} />
                                             <IconContext.Provider value={{ color: item.alive === "online" ? "#5CC853" : "#FF7B7B" }}>
                                                 <GoDotFill style={{}} size={20} />
                                             </IconContext.Provider>
@@ -163,7 +163,7 @@ export default function Pump() {
 
                                 </Grid.Container>
                             </Card>
-                            <Text size={13} css={{ fontFamily: 'NotoSansThai' }}>{item.name}</Text>
+                            <Text size={13} css={{ fontFamily: 'NotoSansThai',pt:9,pb:12 }}>{item.name}</Text>
                         </Grid.Container>
                     ))}
                 </Grid.Container>

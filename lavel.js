@@ -1,0 +1,49 @@
+const lavel = [
+    {
+        "name":"ถังน้ำดิบ",
+        "id":"10",
+        "topicControl":"",
+        "topicData":"",
+        "topicAlive":"",
+        "alive":"",
+        "waterLevel":"",
+        "value":false,
+        "image":"/images/water-tank.png"
+
+    },
+    {
+        "name":"ถังน้ำหอสูง",
+        "id":"10",
+        "topicControl":"",
+        "topicData":"",
+        "topicAlive":"",
+        "alive":"",
+        "waterLevel":"",
+        "value":false,
+        "image":"/images/water-tank.png"
+    },
+    {
+        "name":"สารส้ม",
+        "id":"20",
+        "topicControl":"",
+        "topicData":"",
+        "topicAlive":"",
+        "alive":"",
+        "waterLevel":"",
+        "value":false,
+        "image":"/images/fertilizer-tank.png"
+    },
+    {
+        "name":"คลอรีน",
+        "id":"21",
+        "topicControl":"",
+        "topicData":"",
+        "topicAlive":"",
+        "alive":"",
+        "waterLevel":"",
+        "value":false,
+        "image":"/images/fertilizer-tank.png"
+    }
+]
+
+module.exports = lavel; 
