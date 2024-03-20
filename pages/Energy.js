@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Modal, Grid, Button, Text, Container, Spacer, Switch, } from "@nextui-org/react";
 
 
-export default function Energy() {
+export default function Energy({ isLock, clickLock, addTimeLock, client }) {
     return (
         <Grid.Container css={{  ml: 25,mt: 25 }}>
             <Grid >

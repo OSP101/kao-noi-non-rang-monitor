@@ -14,7 +14,7 @@ quality.map((topic) => {
     topic.topicData = mainSystem + "/" + "device/" + topic.id + "/" + "data"
     topic.topicAlive = mainSystem + "/" + "device/" + topic.id + "/" + "alive"
 })
-export default function Quality() {
+export default function Quality({ isLock, clickLock, addTimeLock, client }) {
     return (
         <Grid.Container css={{ ml: 25 ,mt: 25}}>
             <Grid >
@@ -30,9 +30,9 @@ export default function Quality() {
 
                                 <div>
                                     <Grid.Container css={{}} alignItems="center" justify="space-around">
-                                        <IconContext.Provider value={{ color: "#09A3FF" }}>
-                                            <IoWater style={{ marginTop: 5 }} size={45} />
-                                        </IconContext.Provider>
+                                        {/* <IconContext.Provider value={{ color: "#09A3FF" }}> */}
+                                            <IoWater  color='' style={{ marginTop: 5 }} size={45} />
+                                        {/* </IconContext.Provider> */}
                                     </Grid.Container>
                                     <Grid.Container alignItems="center" justify="space-around">
                                         <Text color="" size={13} css={{ fontFamily: 'NotoSansThai' }}>ถังน้ำดิบ 100 %</Text>
@@ -41,9 +41,10 @@ export default function Quality() {
 
                                 <div>
                                     <Grid.Container css={{}} alignItems="center" justify="space-around">
-                                        <IconContext.Provider value={{ color: "#09A3FF" }}>
+                                        {/* <IconContext.Provider value={{ color: "#09A3FF" }}> */}
                                             <IoWater style={{ marginTop: 5 }} size={45} />
-                                        </IconContext.Provider>                                    </Grid.Container>
+                                        {/* </IconContext.Provider>                                     */}
+                                        </Grid.Container>
                                     <Grid.Container alignItems="center" justify="space-around">
                                         <Text color="" size={13} css={{ fontFamily: 'NotoSansThai' }}>ถังน้ำดิบ 100 %</Text>
                                     </Grid.Container>

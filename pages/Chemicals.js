@@ -14,7 +14,7 @@ chemicals.map((topic) => {
     topic.topicAlive = mainSystem + "/" + "device/" + topic.id + "/" + "alive"
 })
 
-export default function Chemicals() {
+export default function Chemicals({ isLock, clickLock, addTimeLock, client }) {
 
     const [ chemicalsData, setChemicalsData ] = useState(chemicals)
     return (

@@ -12,7 +12,7 @@ lavel.map((topic) => {
     topic.topicAlive = mainSystem + "/" + "device/" + topic.id + "/" + "alive"
 })
 
-export default function Lavel() {
+export default function Lavel({ isLock, clickLock, addTimeLock, client }) {
 
     const [lavelData, setLavelData] = useState(lavel);
 
