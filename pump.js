@@ -9,13 +9,13 @@ const pump = [
         "overload": "t", 
         "voltage": "1500", 
         "current": "10", 
-        "power": "1500", 
+        "power": "1500.00", 
         "energy": "", 
         "frequency": "", 
         "pf":"",
         "temperature":"89",
         "flowRate":"100",
-        "value": false,
+        "value": "close",
     },
     {
         "name": "ปั๊มน้ำแรงดันสูง",
@@ -33,7 +33,7 @@ const pump = [
         "pf":"",
         "temperature":"",
         "flowRate":"",
-        "value": false,
+        "value": "close",
     }
 ]
 

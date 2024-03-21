@@ -32,14 +32,14 @@ var host = ""
   options = {
     // Clean session
     // clean: true,
-    connectTimeout: 4000,
+    connectTimeout: 6000,
     // Authentication
     clientId: 'water_system_dashboard_2' + Math.random().toString(16),
     username: 'project',
     password: '123456788',
   }
 
-  host = "ws://192.168.1.107:9001/mqtt"
+  host = "ws://192.168.31.70:9001/mqtt"
 
 
 

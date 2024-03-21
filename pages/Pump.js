@@ -11,16 +11,25 @@ import { FaTemperatureHigh } from "react-icons/fa";
 import { BiWater } from 'react-icons/bi';
 
 
-const mainSystem = "environment"
+const mainSystem = "tabwater"
 pump.map((topic) => {
     topic.topicControl = mainSystem + "/" + "device/" + topic.id + "/" + "control"
     topic.topicData = mainSystem + "/" + "device/" + topic.id + "/" + "data"
     topic.topicAlive = mainSystem + "/" + "device/" + topic.id + "/" + "alive"
 })
 
+const initFlow = [
+    {
+        "topicData": mainSystem + "/" + "device/" + "15" + "/" + "data",
+    },
+]
+
+
 export default function Pump({ isLock, clickLock, addTimeLock, client }) {
 
-    const [pumpData, scalePumpData] = useState(pump)
+    const [pumpData, scalePumpData] = useState(pump);
+    const [flow, setFlow] = useState(initFlow);
+
 
     const [mixfertilizerWaterLevel, setMixfertilizerWaterLevel] = useState("0")
 
@@ -31,15 +40,18 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
         toppicSub.push(topic.topicAlive)
     })
 
+    toppicSub.push(flow[0].topicData);
+
+
     useEffect(() => {
         if(client){
-            client.setMaxListeners(20); // เพิ่มขีดจำกัดเป็น 20 listener
+
             client.subscribe(toppicSub,function (err) {
                 if (err) {
                     console.log(err);
                 }else{
                     console.log("Subscribed");
-                    console.log(toppicSub); 
+                    // console.log(toppicSub); 
                 }
             });
             console.log('test');
@@ -47,7 +59,7 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
             client.on('message', (topic, message) => {
                 var msg = message.toString()
 
-                console.log(topic,msg,'test');
+                // console.log(topic,msg,'test');
 
                 const setValue = pumpData.map((item) => {
                     if (item.topicData === topic) {
@@ -60,32 +72,48 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
                         item.frequency = msg.frequency;
                         item.pf = msg.pf;
                         item.temperature = msg.temperature;
+                        item.value = msg.status;
+                        // console.log(msg.status);
                     }if (item.topicAlive === topic) {
                         item.alive = msg
+                    }
+                    if( flow[0].topicData === topic){
+                        // msg = JSON.parse(msg);
+                        item.flowRate = JSON.parse(msg).flowRate;
+                        // console.log(JSON.parse(msg).flowRate);
                     }
                         return item
                     
                 })
                 scalePumpData(setValue);
             });
-
-           
-console.log("toppicSub");
             
         }
     }, [client])
 
-//     const test = () => {
-//         if (client) {
-//             client.on('message', (topic, message) => {
-//                 console.log('Message received on topic:', topic);
-//                 console.log('Message:', message.toString());
-//             });
-//     }
+    const clickPumpControl = (id, value) => {
+        if (isLock) {
+            clickLock()
+        }
+        else {
+            // const result = valueControl.find(x => x.id == id);
+            const setValue = pumpData.map((item, val) => {
+                // console.log(val)
+                if (item.id == id) {
+                    // item.value = !item.value
+                    // item.animation = item.value ? 1 : 0
+                    client.publish(item.topicControl, value)
+                    // console.log("132")
+                }
+                return item
+            })
+            addTimeLock()
+        }
 
-// }
 
-// test()
+    }
+
+
 
     return (
         <Grid.Container css={{ height: 450 , width: 492}}>
@@ -105,9 +133,9 @@ console.log("toppicSub");
 
 
                                             <Button.Group size="xs" color="success">
-                                                <Button css={{ fontFamily: 'NotoSansThai' }}>ปิด</Button>
-                                                <Button css={{ fontFamily: 'NotoSansThai', backgroundColor: "#31406D" }}>เปิด</Button>
-                                                <Button css={{ fontFamily: 'NotoSansThai', backgroundColor: "#31406D" }}>อัตโนมัติ</Button>
+                                                <Button onPress={() => clickPumpControl(item.id,"close")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "close" ? "success" : "#31406D" }}>ปิด</Button>
+                                                <Button onPress={() => clickPumpControl(item.id,"open")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "open" ? "success" : "#31406D" }}>เปิด</Button>
+                                                <Button onPress={() => clickPumpControl(item.id,"auto")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "auto" ? "success" : "#31406D" }}>อัตโนมัติ</Button>
                                             </Button.Group>
                                         </Grid.Container>
 
