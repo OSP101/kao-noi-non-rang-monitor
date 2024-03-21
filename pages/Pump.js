@@ -44,12 +44,12 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
 
 
     useEffect(() => {
-        if(client){
+        if (client) {
 
-            client.subscribe(toppicSub,function (err) {
+            client.subscribe(toppicSub, function (err) {
                 if (err) {
                     console.log(err);
-                }else{
+                } else {
                     console.log("Subscribed");
                     // console.log(toppicSub); 
                 }
@@ -74,20 +74,20 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
                         item.temperature = msg.temperature;
                         item.value = msg.status;
                         // console.log(msg.status);
-                    }if (item.topicAlive === topic) {
+                    } if (item.topicAlive === topic) {
                         item.alive = msg
                     }
-                    if( flow[0].topicData === topic){
+                    if (flow[0].topicData === topic) {
                         // msg = JSON.parse(msg);
                         item.flowRate = JSON.parse(msg).flowRate;
                         // console.log(JSON.parse(msg).flowRate);
                     }
-                        return item
-                    
+                    return item
+
                 })
                 scalePumpData(setValue);
             });
-            
+
         }
     }, [client])
 
@@ -102,8 +102,9 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
                 if (item.id == id) {
                     // item.value = !item.value
                     // item.animation = item.value ? 1 : 0
-                    client.publish(item.topicControl, value)
-                    // console.log("132")
+                    const datamsg = JSON.stringify({ "id": id, "value": value })
+                    client.publish("controlmonitor", datamsg)
+                    console.log("Value", datamsg)
                 }
                 return item
             })
@@ -116,26 +117,26 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
 
 
     return (
-        <Grid.Container css={{ height: 450 , width: 492}}>
+        <Grid.Container css={{ height: 450, width: 492 }}>
             <Grid >
                 <Grid.Container css={{ mt: 10 }}>
                     {pumpData.map((item) => (
                         <Grid.Container key={item.id} justify="center" alignItems="center" css={{ d: "flex" }}>
-                            <Card variant="flat" css={{ mt: 0, p: 10, height: 170, backgroundColor: "#000B33", borderRadius: 20 }} >
+                            <Card variant="flat" css={{ mt: 0, p: 10, height: 170, backgroundColor: item.overload === "1" ? "#FFC300" : item.value === "close" ? "#000B33" : "#008000", borderRadius: 20 }} >
 
                                 <Grid.Container alignItems="center" justify="space-between" css={{ mt: 10 }}>
                                     <Grid css={{ d: "flex", flexDirection: "row" }}>
                                         <Grid.Container justify="center" alignItems="center" css={{ d: "flex", flexDirection: "column" }}>
                                             <Image alt="" src='/images/water-pump.png' width={70} height={70} />
                                             {/* <IconContext.Provider value={{ color: item.alive === "online" ? "#5CC853" : "red" }}> */}
-                                                <GoDotFill style={{}} size={20} color={`${item.alive === "online" ? "#5CC853" : "red" }`}/>
+                                            <GoDotFill style={{}} size={20} color={`${item.alive === "online" ? "#5CC853" : "red"}`} />
                                             {/* </IconContext.Provider> */}
 
 
-                                            <Button.Group size="xs" color="success">
-                                                <Button onPress={() => clickPumpControl(item.id,"close")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "close" ? "success" : "#31406D" }}>ปิด</Button>
-                                                <Button onPress={() => clickPumpControl(item.id,"open")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "open" ? "success" : "#31406D" }}>เปิด</Button>
-                                                <Button onPress={() => clickPumpControl(item.id,"auto")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "auto" ? "success" : "#31406D" }}>อัตโนมัติ</Button>
+                                            <Button.Group size="xs" color="success" disabled={item.overload === "1"}>
+                                                <Button onPress={() => clickPumpControl(item.id, "close")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "close" ? "success" : "#31406D" }}>ปิด</Button>
+                                                <Button onPress={() => clickPumpControl(item.id, "open")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "open" ? "success" : "#31406D" }}>เปิด</Button>
+                                                <Button onPress={() => clickPumpControl(item.id, "auto")} css={{ fontFamily: 'NotoSansThai', backgroundColor: item.value === "auto" ? "success" : "#31406D" }}>อัตโนมัติ</Button>
                                             </Button.Group>
                                         </Grid.Container>
 
@@ -146,7 +147,7 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
                                                                 {/* <IconContext.Provider value={{ color: "black"}}> */}
-                                                                    <GiElectric color='orange' style={{ marginTop: 6 }} size={25} />
+                                                                <GiElectric color='orange' style={{ marginTop: 6 }} size={25} />
                                                                 {/* </IconContext.Provider> */}
                                                             </Grid.Container>
                                                         </Card>
@@ -172,7 +173,7 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
                                                                 {/* <IconContext.Provider value={{ color: "black"}}> */}
-                                                                    <GiElectric color='orange' style={{ marginTop: 6 }} size={25} />
+                                                                <GiElectric color='orange' style={{ marginTop: 6 }} size={25} />
                                                                 {/* </IconContext.Provider> */}
                                                             </Grid.Container>
                                                         </Card>
@@ -202,7 +203,7 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
                                                                 {/* <IconContext.Provider value={{ color: "black"}}> */}
-                                                                    <FaTemperatureHigh color='red' style={{ marginTop: 6 }} size={25} />
+                                                                <FaTemperatureHigh color='red' style={{ marginTop: 6 }} size={25} />
                                                                 {/* </IconContext.Provider> */}
                                                             </Grid.Container>
                                                         </Card>
@@ -228,7 +229,7 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
                                                         <Card variant="flat" css={{ mt: 0, width: 40, height: 40, backgroundColor: "white", borderRadius: 15 }} >
                                                             <Grid.Container justify="center" alignItems="center">
                                                                 {/* <IconContext.Provider value={{ color: "black" }}> */}
-                                                                    <BiWater color='blue' style={{ marginTop: 6 }} size={25} />
+                                                                <BiWater color='blue' style={{ marginTop: 6 }} size={25} />
                                                                 {/* </IconContext.Provider> */}
                                                             </Grid.Container>
                                                         </Card>
@@ -256,7 +257,7 @@ export default function Pump({ isLock, clickLock, addTimeLock, client }) {
 
                                 </Grid.Container>
                             </Card>
-                            <Text size={13} css={{ fontFamily: 'NotoSansThai',pt:9,pb:12 }}>{item.name}</Text>
+                            <Text size={13} css={{ fontFamily: 'NotoSansThai', pt: 9, pb: 12 }}>{item.name}</Text>
                         </Grid.Container>
                     ))}
                 </Grid.Container>
